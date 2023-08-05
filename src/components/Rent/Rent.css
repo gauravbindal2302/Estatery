@@ -1,0 +1,223 @@
+.rent {
+  padding: 0px 180px;
+}
+
+.rent-row-1 {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+  margin: 20px 0;
+}
+
+.rent-row-1 .search input {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #8c8b8b;
+  outline: none;
+}
+
+.rent-row-1 .search input:focus {
+  box-shadow: 4px 4px 9px #8c8b8b;
+  border: none;
+}
+
+.rent-row-1 .search .search-items {
+  display: none;
+}
+
+.rent-row-2 {
+  background: #fbfafa;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  border-radius: 8px;
+}
+
+.rent-row-2 .rent-col {
+  border-right: 1px solid #000;
+  width: 20%;
+}
+
+.rent-row-2 .rent-col label {
+  font-size: 12.5px;
+  color: #5a5858;
+  letter-spacing: 1px;
+}
+
+.rent-row-2 .rent-col span {
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  line-height: 2;
+  font-weight: bold;
+  color: #717072;
+}
+
+.rent-row-2 .rent-col .select-location input {
+  width: 90%;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  line-height: 2;
+  border-bottom: 1px solid transparent;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  background: transparent;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.rent-row-2 .rent-col .select-location input:focus {
+  border-bottom: 1px solid #656464;
+}
+.rent-row-2 .rent-col .select-location input::placeholder {
+  color: black;
+}
+
+.rent-row-2 .rent-col .select-location ul {
+  position: absolute;
+  list-style: none;
+  background: #f8f8f8;
+  margin: 5px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  line-height: 1.7;
+  z-index: 1;
+  border-radius: 0 0 8px 8px;
+  letter-spacing: 1px;
+}
+.rent-row-2 .rent-col .select-location ul li {
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  color: #616060;
+}
+
+.rent-row-2 .rent-col .select-location ul li:hover {
+  transform: translateX(8px);
+  color: #341095;
+}
+
+.rent-row-2 .rent-col .styled-select {
+  width: 218px;
+  margin-left: -4px;
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 2;
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#date {
+  width: 24px;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  margin-right: 10px;
+}
+
+.rent-row-2 .rent-col span .styled-select option {
+  background-color: #fbfafa;
+  color: #616060;
+  font-size: 14px;
+  padding: 7px 12px;
+  font-weight: normal;
+}
+
+.styled-select option:first-child {
+  display: none;
+}
+
+.rent-row-2 button {
+  padding: 12px 30px;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  border: none;
+  border-radius: 5px;
+  background: #886ad5;
+  color: #ffffff;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+.rent-row-2 button:hover {
+  background: #9179cf;
+}
+
+.rent-row-3 {
+  margin: 30px 0 0 0;
+  padding-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+}
+
+.rent-row-3 .card {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.rent-row-3 .card .card-img {
+  border-radius: 15px 15px 0 0;
+  overflow: hidden;
+}
+
+.rent-row-3 .card .card-img img {
+  width: 100%;
+  height: 200px;
+  transition: transform 0.3s;
+}
+
+.rent-row-3 .card .card-img img:hover {
+  transform: scale(1.1);
+}
+
+.rent-row-3 .card .card-content {
+  padding: 10px 20px;
+}
+
+.rent-row-3 .card .card-content span {
+  font-size: 26px;
+  font-weight: bold;
+  display: inline;
+  color: #7354c3;
+}
+
+.rent-row-3 .card .card-content p {
+  font-size: 14px;
+  display: inline;
+  color: #575656;
+  letter-spacing: 1px;
+  line-height: 0.2;
+}
+
+.rent-row-3 .card .card-content h2 {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1.4;
+  height: 14px;
+  margin-top: 16px;
+}
+.rent-row-3 .card .card-content hr {
+  color: #c0bebe;
+  margin: 12px 0 0 0;
+}
+.rent-row-3 .card .card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-footer svg {
+  fill: #7354c3;
+  width: 20px;
+  height: 14px;
+  margin-right: 8px;
+}
+.rent-row-3 .card .card-footer p {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
