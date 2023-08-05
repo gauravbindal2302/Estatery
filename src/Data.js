@@ -57,7 +57,7 @@ const propertiesData = [
     image: "/Images/5.png",
     date: "2023-08-18",
     houseType: "Villa",
-    propertyType: "Home",
+    propertyType: "Residential",
   },
   {
     name: "Modern Apartment 2",
@@ -108,7 +108,7 @@ const propertiesData = [
     propertyType: "Residential",
   },
   {
-    name: "Commercial Office Space",
+    name: "Commercial Office",
     location: "345 Elm Street, City J",
     bedrooms: 0,
     bathrooms: 1,
@@ -129,7 +129,7 @@ const propertiesData = [
     image: "/Images/1.png",
     date: "2023-09-20",
     houseType: "Cabin",
-    propertyType: "Home",
+    propertyType: "Residential",
   },
   {
     name: "Industrial Warehouse",
@@ -153,7 +153,7 @@ const propertiesData = [
     image: "/Images/3.png",
     date: "2023-09-25",
     houseType: "Villa",
-    propertyType: "Home",
+    propertyType: "Residential",
   },
   {
     name: "Modern Townhouse",

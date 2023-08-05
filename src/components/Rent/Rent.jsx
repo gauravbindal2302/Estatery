@@ -7,34 +7,54 @@ import "./Rent.css";
 
 export default function Rent() {
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
-  const [priceRange, setPriceRange] = useState([0, 5000]);
-  const [suggestions, setSuggestions] = useState([]);
-
+  const [rentRange, setRentRange] = useState([0, 16000]);
   const handleLocationChange = (event) => {
     const inputValue = event.target.value;
     setSelectedLocation(inputValue);
 
     if (inputValue === "") {
-      setSuggestions([]);
+      setLocationSuggestions([]);
     } else {
       const filteredSuggestions = propertiesData.filter((property) =>
         property.location.toLowerCase().includes(inputValue.toLowerCase())
       );
-      setSuggestions(filteredSuggestions);
+      setLocationSuggestions(filteredSuggestions);
     }
   };
+
   const handleSuggestionClick = (selectedLocation) => {
     setSelectedLocation(selectedLocation);
-    setSuggestions([]); // Clear suggestions after selecting one
+    setLocationSuggestions([]);
   };
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
-  const handlePriceRangeChange = (value) => {
-    setPriceRange(value);
+
+  const handleRentPriceChange = (value) => {
+    setRentRange([rentRange[0], value]);
   };
+
+  const getUniquePropertyTypes = () => {
+    const uniqueTypes = [
+      ...new Set(propertiesData.map((property) => property.propertyType)),
+    ];
+    return uniqueTypes;
+  };
+
+  /*const calculateAdjustedPrice = () => {
+    const maxRent = Math.max(
+      ...propertiesData.map((property) => property.rent)
+    );
+    const minRent = Math.min(
+      ...propertiesData.map((property) => property.rent)
+    );
+
+    return [minRent, maxRent];
+  };*/
+
   return (
     <>
       <div className="rent">
@@ -56,7 +76,7 @@ export default function Rent() {
             <div className="rent-col">
               <label>Location</label>
               <br />
-              <div className="select-location">
+              <div className="select">
                 <input
                   type="text"
                   placeholder="Search Location"
@@ -65,7 +85,7 @@ export default function Rent() {
                   onChange={handleLocationChange}
                 />
                 <ul>
-                  {suggestions.map((property, index) => (
+                  {locationSuggestions.map((property, index) => (
                     <li
                       key={index}
                       onClick={() => handleSuggestionClick(property.location)}
@@ -96,7 +116,6 @@ export default function Rent() {
                 />
               </span>
             </div>
-
             <div className="rent-col">
               <label
                 style={{
@@ -104,17 +123,17 @@ export default function Rent() {
                   justifyContent: "space-between",
                 }}
               >
-                <label>Price</label>
+                <label>Rent Range</label>
                 <label style={{ marginRight: "15px" }}>
-                  ${priceRange[0]} - ${priceRange[1]}
+                  ${rentRange[0]} - ${rentRange[1]}
                 </label>
               </label>
               <br />
               <Slider
                 min={0}
-                max={10000}
-                value={priceRange}
-                onChange={handlePriceRangeChange}
+                max={5000}
+                value={rentRange[1]}
+                onChange={handleRentPriceChange}
                 className="slider"
                 style={{ width: "93%" }}
               />
@@ -123,14 +142,16 @@ export default function Rent() {
               <label>Property Type</label>
               <br />
               <span>
-                <select className="styled-select">
-                  <option value="">Select Property</option>
-                  {propertiesData.map((property, index) => (
-                    <option key={index} value={property.propertyType}>
-                      {property.propertyType}
-                    </option>
-                  ))}
-                </select>
+                <span>
+                  <select className="styled-select">
+                    <option value="">Select Property</option>
+                    {getUniquePropertyTypes().map((propertyType, index) => (
+                      <option key={index} value={propertyType}>
+                        {propertyType}
+                      </option>
+                    ))}
+                  </select>
+                </span>
               </span>
             </div>
             <button>Search</button>
