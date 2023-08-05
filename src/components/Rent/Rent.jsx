@@ -9,7 +9,10 @@ export default function Rent() {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
-  const [rentRange, setRentRange] = useState([0, 16000]);
+  const [rentRange, setRentRange] = useState([0, 5000]);
+  const [selectedPropertyType, setSelectedPropertyType] = useState("");
+  const [filteredProperties, setFilteredProperties] = useState(propertiesData);
+
   const handleLocationChange = (event) => {
     const inputValue = event.target.value;
     setSelectedLocation(inputValue);
@@ -17,9 +20,13 @@ export default function Rent() {
     if (inputValue === "") {
       setLocationSuggestions([]);
     } else {
-      const filteredSuggestions = propertiesData.filter((property) =>
+      var filteredSuggestions = propertiesData.filter((property) =>
         property.location.toLowerCase().includes(inputValue.toLowerCase())
       );
+      filteredSuggestions = filteredSuggestions.map((property) =>
+        property.location.split(", ").slice(1).join(" ")
+      );
+      filteredSuggestions = [...new Set(filteredSuggestions)];
       setLocationSuggestions(filteredSuggestions);
     }
   };
@@ -42,6 +49,32 @@ export default function Rent() {
       ...new Set(propertiesData.map((property) => property.propertyType)),
     ];
     return uniqueTypes;
+  };
+
+  const handleSearch = () => {
+    const filteredProperties = propertiesData.filter((property) => {
+      const locationMatch =
+        selectedLocation === "" ||
+        property.location
+          .toLowerCase()
+          .includes(selectedLocation.toLowerCase());
+
+      const dateMatch = selectedDate === "" || property.date === selectedDate;
+
+      const rentMatch =
+        property.rent >= rentRange[0] && property.rent <= rentRange[1];
+
+      const propertyTypeMatch =
+        selectedPropertyType === "" ||
+        property.propertyType === selectedPropertyType;
+
+      return locationMatch && dateMatch && rentMatch && propertyTypeMatch;
+    });
+
+    filteredProperties.sort(function (first, second) {
+      return first.rent - second.rent;
+    });
+    setFilteredProperties(filteredProperties);
   };
 
   /*const calculateAdjustedPrice = () => {
@@ -85,12 +118,12 @@ export default function Rent() {
                   onChange={handleLocationChange}
                 />
                 <ul>
-                  {locationSuggestions.map((property, index) => (
+                  {locationSuggestions.map((propertyLocation, index) => (
                     <li
                       key={index}
-                      onClick={() => handleSuggestionClick(property.location)}
+                      onClick={() => handleSuggestionClick(propertyLocation)}
                     >
-                      {property.location}
+                      {propertyLocation}
                     </li>
                   ))}
                 </ul>
@@ -143,7 +176,11 @@ export default function Rent() {
               <br />
               <span>
                 <span>
-                  <select className="styled-select">
+                  <select
+                    className="styled-select"
+                    value={selectedPropertyType}
+                    onChange={(e) => setSelectedPropertyType(e.target.value)}
+                  >
                     <option value="">Select Property</option>
                     {getUniquePropertyTypes().map((propertyType, index) => (
                       <option key={index} value={propertyType}>
@@ -154,10 +191,10 @@ export default function Rent() {
                 </span>
               </span>
             </div>
-            <button>Search</button>
+            <button onClick={handleSearch}>Search</button>
           </div>
           <div className="rent-row-3">
-            {propertiesData.map((property, index) => (
+            {filteredProperties.map((property, index) => (
               <div className="card" key={index}>
                 <div className="card-img">
                   <img src={property.image} alt={property.name} />
